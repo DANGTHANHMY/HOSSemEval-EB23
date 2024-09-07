@@ -62,11 +62,10 @@ def convert_examples_to_features(examples, label_list, max_seq_length, tokenizer
 	features = []
 	all_tokens = []
 	for (ex_index, example) in enumerate(tqdm(examples)):
-		print(examples)
 		if tokenize_method == "word_split":
 			# word_split
 			word_num = 0
-			tokens_a = tokenizer.tokenize(example.text_a)
+			tokens_a = tokenizer.tokenize(example.text_a) #sentence
 			ner_labels_org = example.ner_labels_a.strip().split()
 			ner_labels_a = []
 			token_bias_num = 0
