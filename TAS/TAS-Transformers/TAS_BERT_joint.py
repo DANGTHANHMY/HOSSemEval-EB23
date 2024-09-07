@@ -62,6 +62,7 @@ def convert_examples_to_features(examples, label_list, max_seq_length, tokenizer
 	features = []
 	all_tokens = []
 	for (ex_index, example) in enumerate(tqdm(examples)):
+		print(examples)
 		if tokenize_method == "word_split":
 			# word_split
 			word_num = 0
