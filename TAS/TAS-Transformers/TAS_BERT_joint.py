@@ -218,6 +218,11 @@ def main():
 						type=str,
 						required=True,
 						help="The output directory where the model checkpoints will be written.")
+	parser.add_argument("--save_path",
+						default='results/absa_dataset/three_joint/TO/my_result',
+						type=str,
+						required=True,
+						help="The output directory where the model checkpoints will be written.")
 	parser.add_argument("--model_name",
 						default='bert-base-uncased',
 						type=str,
@@ -418,6 +423,16 @@ def main():
 
 	# optimizer_parameters = model.parameters()
 	optimizer = AdamW(model.parameters(), lr=args.learning_rate, eps=1e-8)
+
+	# Save checkpoint
+	history_results = {
+		"epoch":[],
+		"global_step":[],
+		"loss":[],
+		"test_loss":[],
+		"ner_test_loss":[],
+		"test_accuracy":[]
+	}
 
 
 	# train
