@@ -516,7 +516,13 @@ if args.do_inference:
     scores = evaluate(test_loader, model, sent, check_inference=True)
 
     # write to file
-    log_file_path = f"results_log/{args.dataset}.txt"
+
+    # write to file
+    results_log_dir = "./results_log"
+    if not os.path.exists(results_log_dir):
+        os.mkdir(results_log_dir)
+        
+    log_file_path = f"{results_log_dir}/{args.dataset}.txt"
     local_time = time.asctime(time.localtime(time.time()))
 
     exp_settings = f"Datset={args.dataset}; Train bs={args.train_batch_size}, num_epochs = {args.num_train_epochs}"
