@@ -381,7 +381,8 @@ print("\n", "=" * 30, f"NEW EXP: ASQP on {args.dataset}", "=" * 30, "\n")
 
 # sanity check
 # show one sample to check the code and the expected output
-tokenizer = T5Tokenizer.from_pretrained(args.model_name_or_path)
+#tokenizer = T5Tokenizer.from_pretrained(args.model_name_or_path)
+tokenizer = BartTokenizer.from_pretrained(args.model_name_or_path)
 print(f"Here is an example (from the dev set):")
 dataset = ABSADataset(
     tokenizer=tokenizer,
