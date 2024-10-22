@@ -18,6 +18,8 @@ from tqdm import tqdm
 # from transformers import BertTokenizer, EncoderDecoderModel
 #from transformers import (AdamW, T5ForConditionalGeneration, T5Tokenizer, get_linear_schedule_with_warmup,)
 from transformers import (AdamW, MBartForConditionalGeneration, MBartTokenizer, get_linear_schedule_with_warmup,)
+from transformers import (AdamW, MBartForConditionalGeneration, MBart50TokenizerFast, get_linear_schedule_with_warmup,)
+
 
 
 logger = logging.getLogger(__name__)
@@ -382,7 +384,7 @@ print("\n", "=" * 30, f"NEW EXP: ASQP on {args.dataset}", "=" * 30, "\n")
 # sanity check
 # show one sample to check the code and the expected output
 #tokenizer = T5Tokenizer.from_pretrained(args.model_name_or_path)
-tokenizer = MBartTokenizer.from_pretrained(args.model_name_or_path)
+tokenizer = MBartTokenizer.from_pretrained(args.model_name_or_path, src_lang="vi_VN", tgt_lang="ro_RO")
 print(f"Here is an example (from the dev set):")
 dataset = ABSADataset(
     tokenizer=tokenizer,
