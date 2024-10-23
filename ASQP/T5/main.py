@@ -16,9 +16,7 @@ from torch.utils.data import DataLoader
 from tqdm import tqdm
 
 # from transformers import BertTokenizer, EncoderDecoderModel
-#from transformers import (AdamW, T5ForConditionalGeneration, T5Tokenizer, get_linear_schedule_with_warmup,)
-from transformers import (AdamW, BartForConditionalGeneration, BartTokenizer, get_linear_schedule_with_warmup,)
-
+from transformers import (AdamW, T5ForConditionalGeneration, T5Tokenizer, get_linear_schedule_with_warmup)
 
 logger = logging.getLogger(__name__)
 
@@ -381,8 +379,7 @@ print("\n", "=" * 30, f"NEW EXP: ASQP on {args.dataset}", "=" * 30, "\n")
 
 # sanity check
 # show one sample to check the code and the expected output
-#tokenizer = T5Tokenizer.from_pretrained(args.model_name_or_path)
-tokenizer = BartTokenizer.from_pretrained(args.model_name_or_path)
+tokenizer = T5Tokenizer.from_pretrained(args.model_name_or_path)
 print(f"Here is an example (from the dev set):")
 dataset = ABSADataset(
     tokenizer=tokenizer,
@@ -407,15 +404,10 @@ if args.do_train:
     print("\n****** Conduct Training ******")
 
     # initialize the T5 model
-    #tfm_model = T5ForConditionalGeneration.from_pretrained(args.model_name_or_path)
-    #model = T5FineTuner(args, tfm_model, tokenizer)
-
-    # initialize the BART model
-    tfm_model = BartForConditionalGeneration.from_pretrained(
-        args.model_name_or_path
-    )
+    tfm_model = T5ForConditionalGeneration.from_pretrained(args.model_name_or_path)
     model = T5FineTuner(args, tfm_model, tokenizer)
 
+    
     # checkpoint_callback = pl.callbacks.ModelCheckpoint(
     #     filepath=args.output_dir, prefix="ckt", monitor='val_loss', mode='min', save_top_k=4
     # )
@@ -494,13 +486,8 @@ if args.do_inference:
     print(
         "Note that a pretrained model is required and `do_true` should be False"
     )
-    #tokenizer = T5Tokenizer.from_pretrained(args.output_dir)
-    #tfm_model = T5ForConditionalGeneration.from_pretrained(args.output_dir)
-
-    tokenizer = BartTokenizer.from_pretrained(args.output_dir)
-    tfm_model = BartForConditionalGeneration.from_pretrained(args.output_dir)
-
-    
+    tokenizer = T5Tokenizer.from_pretrained(args.output_dir)
+    tfm_model = T5ForConditionalGeneration.from_pretrained(args.output_dir)
 
     model = T5FineTuner(args, tfm_model, tokenizer)
 
